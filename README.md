@@ -130,10 +130,11 @@ tracking `github.com/pxlshpr/ChartKit` (private). Make every change there:
    - **NutriKit** depends on the URL (`from: "1.0.0"`) in `Packages/Features/Package.swift`, and
      the project's local package reference (`../Packages/ChartKit`) overrides it, so it builds the
      checkout directly and picks changes up at once, like GlassNumPad.
-   - **Overload** uses `path: ../Packages/ChartKit` in `project.yml` while the engine is shaped
-     alongside it.
-   - **Insights** (and any later app) depend on tagged releases; raise `from:` if they need the
-     new API, then re-resolve (`xcodebuild -resolvePackageDependencies`).
+   - **Overload** (`path: ../Packages/ChartKit`) and **Insights** (`path: ../../Packages/ChartKit`
+     in `ios/project.yml`) build the checkout by path, so they pick changes up at once too. They
+     use a path rather than the URL because pxlhome's Xcode can't fetch the private repo.
+   - A later app that depends on tagged releases raises `from:` when it needs the new API, then
+     re-resolves (`xcodebuild -resolvePackageDependencies`).
 5. Pull the checkout on the other Mac (`git pull --ff-only`), so both machines build the same
    code.
 
