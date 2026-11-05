@@ -120,7 +120,7 @@ modules declaring one name make it ambiguous. Keep it that way.
 ## Where it's developed, and releasing
 
 The one working copy is `~/Developer/Packages/ChartKit` on each Mac (pxlbook and pxlhome),
-tracking `github.com/pxlshpr/ChartKit` (private). Make every change there:
+tracking `github.com/pxlshpr/ChartKit` (public). Make every change there:
 
 1. Edit and build: `xcodebuild -scheme ChartKit -destination 'generic/platform=iOS Simulator' build`.
 2. Commit and push `main`.
@@ -131,12 +131,11 @@ tracking `github.com/pxlshpr/ChartKit` (private). Make every change there:
      the project's local package reference (`../Packages/ChartKit`) overrides it, so it builds the
      checkout directly and picks changes up at once, like GlassNumPad.
    - **Overload** (`path: ../Packages/ChartKit`) and **Insights** (`path: ../../Packages/ChartKit`
-     in `ios/project.yml`) build the checkout by path, so they pick changes up at once too. They
-     use a path rather than the URL because pxlhome's Xcode can't fetch the private repo.
+     in `ios/project.yml`) build the checkout by path, so they pick changes up at once too.
    - A later app that depends on tagged releases raises `from:` when it needs the new API, then
      re-resolves (`xcodebuild -resolvePackageDependencies`).
 5. Pull the checkout on the other Mac (`git pull --ff-only`), so both machines build the same
    code.
 
-The repo is private, so a consumer that resolves it by URL needs GitHub credentials in that
-Mac's Xcode (or the ssh URL). The local-checkout consumers above don't fetch it.
+The repo is public (since 2026-11-05), so any app can also depend on it by URL with no
+credentials: `.package(url: "https://github.com/pxlshpr/ChartKit.git", from: "1.0.0")`.
