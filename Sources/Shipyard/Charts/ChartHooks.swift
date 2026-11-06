@@ -10,12 +10,13 @@ import UIKit
 /// from its shims.
 ///
 /// Install the hooks once, on the main actor, before the first chart draws: NutriKit does it
-/// from a stored-property bootstrap in `NutriKitApp` (`ChartKitBridge.install()`).
+/// from a stored-property bootstrap in `NutriKitApp` (`ShipyardBridge.install()`).
 ///
-/// Named `ChartHooks`, not `ChartKit`: a type named like its module breaks `ChartKit.X`
-/// qualification. And nothing in this package is public under the names the hosts already use
-/// (`Haptics`, `MenuItems`, `numberFont`, `allowsLandscape`, `snippetTapTarget`) — two imported
-/// modules declaring the same top-level name make it ambiguous in every file that sees both.
+/// Named `ChartHooks`, never after the module (`Shipyard`, ChartKit until #3950): a type named
+/// like its module breaks `Shipyard.X` qualification. And nothing in this package is public
+/// under the names the hosts already use (`Haptics`, `MenuItems`, `numberFont`,
+/// `allowsLandscape`, `snippetTapTarget`) — two imported modules declaring the same top-level
+/// name make it ambiguous in every file that sees both.
 @MainActor
 public enum ChartHooks {
     /// A soft tap: a preset applied, the chart tapped open, ✕, the panel toggle.
