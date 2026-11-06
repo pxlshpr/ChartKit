@@ -230,5 +230,8 @@ Any app can also depend on it by URL with no credentials:
 `.package(url: "https://github.com/pxlshpr/Shipyard.git", from: "2.0.0")`.
 
 A clone of an app made before #3950 still names `../Packages/ChartKit` (and NutriKit's,
-`../Packages/PxlKit`). Those checkouts stay at their last ChartKit / PxlKit commit until every
-such branch has merged; don't pull them, or they take Shipyard's renamed module.
+`../Packages/PxlKit`). Those checkouts stay on both Macs at their last ChartKit / PxlKit commit
+until every such branch has merged, then can be deleted. `~/Developer/Packages/ChartKit` is
+frozen: its `origin` points at itself, so a script's `git pull origin main` (an old branch's
+`tools/duo_probe/remote-sim-build.sh`) is a no-op instead of pulling in Shipyard's renamed
+module.
